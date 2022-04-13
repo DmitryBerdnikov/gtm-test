@@ -15,7 +15,24 @@
   })(window,document,'script','dataLayer','GTM-5HVTF8B');</script>
   <!-- End Google Tag Manager -->
 
-  <button class="btn">button event click</button>
-  <button>default button</button>
+  <button type="button" class="button">Send: <span class="content-value"></span></button>
+
+  <script>
+    const btn = document.querySelector('.button');
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const utmContent = urlParams.get('utm_content')
+
+    btn.addEventListener('click', () => {
+      dataLayer.push({
+        event: 'NuxtRoute',
+        content: utmContent
+      })
+
+      const contentValueEl = document.querySelector('.content-value');
+      contentValueEl.innerHTML = utmContent;
+    });
+  </script>
 </body>
 </html>
